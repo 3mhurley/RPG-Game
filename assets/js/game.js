@@ -107,6 +107,7 @@ $(document).ready(function() {
         rpg.defCap = parseInt($('#' + param).attr('ap'));
 
         $('#attackBtn').toggle();
+        $('#characters').toggle();
     }
 
     var attack = function() {
@@ -119,7 +120,6 @@ $(document).ready(function() {
             // Display stats
             $('#' + rpg.heroName).find('p').text(rpg.heroName + ' - ' + rpg.heroHp);
             $('#' + rpg.defName).find('p').text(rpg.defName + ' - ' + rpg.defHp);
-            $('#wins').text('Wins: ' + rpg.wins);
             $('#health').text('Health: ' + rpg.heroHp);
             $('#attackPower').text('Attack Power: ' + rpg.heroAp);
 
@@ -129,14 +129,16 @@ $(document).ready(function() {
     }
 
     var reset = function() {
-        // Unhide Chars
-        rpg.defenders.forEach(element => {
-            $('#' + rpg.defName).toggle();
+        // Move characters back
+        rpg.characters = ['Luke', 'Han', 'Vader', 'Sidious'];
+        moveEle(rpg.characters,'characters','');
+        rpg.characters.forEach((element,i) => {
+            $('#' + rpg.characters[i]).toggle();
+            $('#' + rpg.characters[i]).find('p').text(rpg.characters[i] + ' - 100 HP');
         });
 
         // Reset obj
         rpg.game = false;
-        rpg.wins = 0;
         rpg.heroName = 'n/a';
         rpg.heroHp = 0;
         rpg.heroAp = 0;
@@ -146,15 +148,18 @@ $(document).ready(function() {
         rpg.defCap = 0;
         rpg.defenders = [];
         rpg.enemies = [];
-        rpg.characters = ['Luke', 'Han', 'Vader', 'Sidious'];
 
-        // Move characters back
-        moveEle(rpg.heroes,'character','heroes');
-        moveEle(rpg.defenders,'character','defenders');
+        $('#wins').text('Wins: ' + rpg.wins);
+        $('#health').text('Health: 0');
+        $('#attackPower').text('Attack Power: 0');
+
 
         // Hide buttons
-        $('#attackBtn').toggle();
+        $('#characters').toggle();
         $('#resetBtn').toggle();
+        if ($('#attackBtn').find('display:') === 'display: inline-block;') {
+            $('#attackBtn').toggle();
+        }
     }
 
     // Pick Hero
@@ -170,13 +175,38 @@ $(document).ready(function() {
 
     // Attack
     $('#attackBtn').on("click", function() {
-        attack();
-
         if (rpg.defHp <= 0) {
             rpg.defenders.splice(rpg.defenders,1);
             $('#' + rpg.defName).toggle();
             $('#attackBtn').toggle();
         }
+        if (rpg.heroHp <= 0) {
+            $('#' + rpg.heroName).toggle();
+            rpg.enemies.forEach((element,i) => {
+                $('#' + rpg.enemies[i]).toggle();
+            });
+            rpg.defenders.forEach((element,i) => {
+                $('#' + rpg.defenders[i]).toggle();
+            });
+            $('#resetBtn').toggle();
+        } else if (rpg.defenders.length === 0 && rpg.enemies.length === 0) {
+            rpg.wins++
+            $('#wins').text('Wins: ' + rpg.wins);
+            $('#' + rpg.heroName).toggle();
+            rpg.enemies.forEach((element,i) => {
+                $('#' + rpg.enemies[i]).toggle();
+            });
+            rpg.defenders.forEach((element,i) => {
+                $('#' + rpg.defenders[i]).toggle();
+            });
+            $('#resetBtn').toggle();
+        }
+        attack();
+    });
+
+    // Reset
+    $('#resetBtn').on("click", function() {
+        reset();
     });
 
 });
