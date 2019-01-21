@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- Title -->
+    <title>RPG Game</title>
+</head>
+<body>
+    
+    <!-- JUMBO the TRON -->
+    <div id="jumboTHEtron" class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Fluid jumbotron</h1>
+            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        </div>
+    </div>
+
+    <!-- Character Selection -->
+    <div id="characters" class="container clearfix">
+        <div id="Luke" class="card float-left character" style="width: 12rem;" charName="Luke" hp="100" ap="20" cap="20">
+            <img src="http://placehold.it/100x100" class="card-img-top" alt="Luke">
+            <div class="card-body">
+                <p class="card-text">Luke - 100 HP</p>
+            </div>
+        </div>
+        <div id="Han" class="card float-left character" style="width: 12rem;" charName="Han" hp="100" ap="20" cap="20">
+            <img src="http://placehold.it/100x100" class="card-img-top" alt="Han">
+            <div class="card-body">
+                <p class="card-text">Han - 100 HP</p>
+            </div>
+        </div>
+        <div id="Vader" class="card float-left character" style="width: 12rem;" charName="Vader" hp="100" ap="20" cap="20">
+            <img src="http://placehold.it/100x100" class="card-img-top" alt="Vader">
+            <div class="card-body">
+                <p class="card-text">Vader - 100 HP</p>
+            </div>
+        </div>
+        <div id="Sidious" class="card float-left character" style="width: 12rem;" charName="Sidious" hp="100" ap="20" cap="20">
+            <img src="http://placehold.it/100x100" class="card-img-top" alt="Sidious">
+            <div class="card-body">
+                <p class="card-text">Sidious - 100 HP</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Character -->
+    <div id="heroes" class="container clearfix">
+
+    </div>
+
+    <!-- Defender -->
+    <div id="enemies" class="container clearfix">
+
+    </div>
+
+    <!-- Attacker -->
+    <div id="defenders" class="container clearfix">
+
+    </div>
+
+    <!-- Controls -->
+    <div class="container clearfix">
+        <!-- Score -->
+        <div class="card clearfix" style="width: 12rem;">
+            <div class="card-body">
+                <p class="card-text">Score</p>
+            </div>
+        </div>
+    
+        <!-- Attack Button -->
+        <button id="attackBtn" type="button" class="btn btn-danger clearfix">Attack!</button>
+
+    </div>
+
+
+    <!-- JS Link -->
+    <script type="text/javascript" src="assets/js/game.js"></script>
+</body>
+</html>
