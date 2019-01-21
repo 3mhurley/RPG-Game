@@ -18,35 +18,36 @@
 <body>
     
     <!-- JUMBO the TRON -->
-    <div id="jumboTHEtron" class="jumbotron jumbotron-fluid">
+    <div id="jumboTHEtron" class="jumbotron jumbotron-fluid p-3 mb-2 bg-primary text-white">
         <div class="container">
-            <h1 class="display-4">Fluid jumbotron</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            <h1 class="display-4">Star Wars RPG</h1>
+            <p class="lead">Choose Your Hero. Choose Your Opponents. Will you win?</p>
         </div>
     </div>
 
     <!-- Character Selection -->
-    <div id="characters" class="container clearfix">
-        <div id="Luke" class="card float-left character" style="width: 12rem;" charName="Luke" hp="100" ap="20" cap="20">
-            <img src="http://placehold.it/100x100" class="card-img-top" alt="Luke">
+    <div id="characters" class="container clearfix testify p-3 mb-2 bg-light text-dark rounded">
+        <h1>Characters</h1>
+        <div id="Luke" class="card float-left characters" style="width: 12rem; height: 10rem;" charName="Luke" hp="100" ap="20" cap="20">
+            <img src="assets/images/luke.jpg" class="card-img-top" alt="Luke" style="height: 7rem;">
             <div class="card-body">
                 <p class="card-text">Luke - 100 HP</p>
             </div>
         </div>
-        <div id="Han" class="card float-left character" style="width: 12rem;" charName="Han" hp="100" ap="20" cap="20">
-            <img src="http://placehold.it/100x100" class="card-img-top" alt="Han">
+        <div id="Han" class="card float-left characters" style="width: 12rem; height: 10rem;" charName="Han" hp="100" ap="20" cap="20">
+            <img src="assets/images/han.jpg" class="card-img-top" alt="Han" style="height: 7rem;">
             <div class="card-body">
                 <p class="card-text">Han - 100 HP</p>
             </div>
         </div>
-        <div id="Vader" class="card float-left character" style="width: 12rem;" charName="Vader" hp="100" ap="20" cap="20">
-            <img src="http://placehold.it/100x100" class="card-img-top" alt="Vader">
+        <div id="Vader" class="card float-left characters" style="width: 12rem; height: 10rem;" charName="Vader" hp="100" ap="20" cap="20">
+            <img src="assets/images/vader.jpeg" class="card-img-top" alt="Vader" style="height: 7rem;">
             <div class="card-body">
                 <p class="card-text">Vader - 100 HP</p>
             </div>
         </div>
-        <div id="Sidious" class="card float-left character" style="width: 12rem;" charName="Sidious" hp="100" ap="20" cap="20">
-            <img src="http://placehold.it/100x100" class="card-img-top" alt="Sidious">
+        <div id="Sidious" class="card float-left characters" style="width: 12rem; height: 10rem;" charName="Sidious" hp="100" ap="20" cap="20">
+            <img src="assets/images/sidious.jpg" class="card-img-top" alt="Sidious" style="height: 7rem;">
             <div class="card-body">
                 <p class="card-text">Sidious - 100 HP</p>
             </div>
@@ -54,31 +55,39 @@
     </div>
 
     <!-- Character -->
-    <div id="heroes" class="container clearfix">
+    <div id="heroes" class="container clearfix p-3 mb-2 bg-light text-dark rounded">
+        <h1>Heroes</h1>
 
     </div>
 
     <!-- Defender -->
-    <div id="enemies" class="container clearfix">
+    <div id="enemies" class="container clearfix p-3 mb-2 bg-light text-dark rounded">
+        <h1>Enemies</h1>
 
     </div>
 
     <!-- Attacker -->
-    <div id="defenders" class="container clearfix">
+    <div id="defenders" class="container clearfix p-3 mb-2 bg-light text-dark rounded">
+        <h1>Defenders</h1>
 
     </div>
 
     <!-- Controls -->
-    <div class="container clearfix">
+    <div id="controls" class="container clearfix p-3 mb-2 bg-light text-dark rounded">
         <!-- Score -->
         <div class="card clearfix" style="width: 12rem;">
             <div class="card-body">
-                <p class="card-text">Score</p>
+                <p id="wins" class="card-text">Wins: 0</p>
+                <p id="health" class="card-text">Health: 0</p>
+                <p id="attackPower" class="card-text">Attack Power: 0</p>
             </div>
         </div>
     
         <!-- Attack Button -->
-        <button id="attackBtn" type="button" class="btn btn-danger clearfix">Attack!</button>
+        <button id="attackBtn" type="button" class="btn btn-danger clearfix hidden">Attack!</button>
+
+        <!-- Reset Button -->
+        <button id="resetBtn" type="button" class="btn btn-danger clearfix hidden">Attack!</button>
 
     </div>
 

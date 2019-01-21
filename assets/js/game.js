@@ -1,5 +1,7 @@
 // Game Object
 var rpg = {
+    game: false,
+    wins: 0,
     heroName: 'n/a',
     heroHp: 0,
     heroAp: 0,
@@ -66,63 +68,115 @@ var rpg = {
 
 $(document).ready(function() {
 
-    var newEle = function(param) {
-        for (var i =0; i < param.length; i++) {
-            var ele = $("<div>");
-            ele.addClass("card float-left hero");
-            ele.attr("charName", param[i]);
-            $("#Characters").append(ele);
-        }
-    }
-
     var moveEle = function(param,newClass,oldClass) {
         param.forEach((element,i) => {
             $('#' + newClass).append( $('#' + param[i]) );
-            $('#' + param[i]).addClass(newClass);
-            $('#' + param[i]).removeClass(oldClass);
+            // $('#' + param[i]).addClass(newClass);
+            // $('#' + param[i]).removeClass(oldClass);
         });
     }
 
-    // Pick Hero
-    $(".character").on("click", function() {
-
+    var selectHero = function(param) {
         // Add hero
-        var char = ($(this).attr("charName"));
-        console.log(char);
-        rpg.heroes = rpg.characters.splice(rpg.characters.indexOf(char),1);
-        console.log(rpg.heroes);
-        console.log(rpg.characters);
+        rpg.heroes = rpg.characters.splice(rpg.characters.indexOf(param),1);
+
         moveEle(rpg.heroes,'heroes','character');
+
+        rpg.heroName = $('#' + param).attr('charName');
+        rpg.heroHp = parseInt($('#' + param).attr('hp'));
+        rpg.heroAp = parseInt($('#' + param).attr('ap'));
 
         // Add enemies
         rpg.characters.forEach((element) => {
             rpg.enemies.push(element);
         });
+
         rpg.characters.splice(rpg.characters,3);
-        console.log(rpg.enemies);
-        console.log(rpg.characters);
+
         moveEle(rpg.enemies,'enemies','character');
+    }
 
-    });
-
-    // Pick Defender
-    $(".enemies").on("click", function() {
-
+    var selectDefender = function(param) {
         // Add defender
-        var char2 = ($(this).attr("charName"));
-        console.log(char2);
-        rpg.defenders = rpg.enemies.splice(rpg.enemies.indexOf(char2),1);
-        console.log(rpg.defenders);
-        console.log(rpg.enemies);
+        rpg.defenders = rpg.enemies.splice(rpg.enemies.indexOf(param),1);
+
         moveEle(rpg.defenders,'defenders','enemies');
 
+        rpg.defName = $('#' + param).attr('charName');
+        rpg.defHp = parseInt($('#' + param).attr('hp'));
+        rpg.defCap = parseInt($('#' + param).attr('ap'));
+
+        $('#attackBtn').toggle();
+    }
+
+    var attack = function() {
+        if ((rpg.defenders.length != 0) && (rpg.defHp > 0)) {
+            // Math it up
+            rpg.defHp -= rpg.heroAp;
+            rpg.heroHp -= rpg.defCap;
+            rpg.heroAp += rpg.heroAp;
+
+            // Display stats
+            $('#' + rpg.heroName).find('p').text(rpg.heroName + ' - ' + rpg.heroHp);
+            $('#' + rpg.defName).find('p').text(rpg.defName + ' - ' + rpg.defHp);
+            $('#wins').text('Wins: ' + rpg.wins);
+            $('#health').text('Health: ' + rpg.heroHp);
+            $('#attackPower').text('Attack Power: ' + rpg.heroAp);
+
+        } else {
+            alert('Pick a defender');
+        }
+    }
+
+    var reset = function() {
+        // Unhide Chars
+        rpg.defenders.forEach(element => {
+            $('#' + rpg.defName).toggle();
+        });
+
+        // Reset obj
+        rpg.game = false;
+        rpg.wins = 0;
+        rpg.heroName = 'n/a';
+        rpg.heroHp = 0;
+        rpg.heroAp = 0;
+        rpg.heroes = [];
+        rpg.defName = 'n/a';
+        rpg.defHp = 0;
+        rpg.defCap = 0;
+        rpg.defenders = [];
+        rpg.enemies = [];
+        rpg.characters = ['Luke', 'Han', 'Vader', 'Sidious'];
+
+        // Move characters back
+        moveEle(rpg.heroes,'character','heroes');
+        moveEle(rpg.defenders,'character','defenders');
+
+        // Hide buttons
+        $('#attackBtn').toggle();
+        $('#resetBtn').toggle();
+    }
+
+    // Pick Hero
+    $("#characters").children().on("click", function() {
+        var char = ($(this).attr("charName"));
+
+        if (rpg.heroes.length === 0) {
+            selectHero(char);
+        } else if (rpg.defenders.length === 0) {
+            selectDefender(char);
+        }
     });
-
-
 
     // Attack
     $('#attackBtn').on("click", function() {
-        //
+        attack();
+
+        if (rpg.defHp <= 0) {
+            rpg.defenders.splice(rpg.defenders,1);
+            $('#' + rpg.defName).toggle();
+            $('#attackBtn').toggle();
+        }
     });
 
 });

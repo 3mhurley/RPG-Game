@@ -1,0 +1,8 @@
+.hidden {
+    display:none;
+}
+
+body {
+    background-color: #000000;
+    background-image: url(../images/lightspeed.png);
+}
